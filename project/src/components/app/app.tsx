@@ -4,7 +4,8 @@ import LoginScreen from '../login-screen/login-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import RoomScreen from '../room-screen/room-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import { AppRoute } from '../../const';
+import PrivateRoute from '../private-route/private-route';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 type propsTypes = {
   offersCount: number
@@ -20,9 +21,13 @@ function App({ offersCount }: propsTypes): JSX.Element {
         <Route path={AppRoute.Login} exact>
           <LoginScreen />
         </Route>
-        <Route path={AppRoute.Favorites} exact>
+        <PrivateRoute
+          exact
+          path={AppRoute.Favorites}
+          authorizationStatus={AuthorizationStatus.NoAuth}
+        >
           <FavoritesScreen />
-        </Route>
+        </PrivateRoute>
         <Route path={AppRoute.Room} exact>
           <RoomScreen />
         </Route>
