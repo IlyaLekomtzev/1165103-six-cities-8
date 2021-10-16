@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-
-const enum Param {
-  OffersCount = 5
-}
+import { offers } from './mocks/offers';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App offersCount={Param.OffersCount} />
+    <App offers={offers} />
   </React.StrictMode>,
   document.getElementById('root'),
 );

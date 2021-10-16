@@ -6,17 +6,18 @@ import RoomScreen from '../room-screen/room-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { Offer } from '../../types/offers';
 
-type propsTypes = {
-  offersCount: number
+type appPropsTypes = {
+  offers: Offer[];
 };
 
-function App({ offersCount }: propsTypes): JSX.Element {
+function App({ offers }: appPropsTypes): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.Main} exact>
-          <MainScreen offersCount={offersCount} />
+          <MainScreen offers={offers} />
         </Route>
         <Route path={AppRoute.Login} exact>
           <LoginScreen />
@@ -26,7 +27,7 @@ function App({ offersCount }: propsTypes): JSX.Element {
           path={AppRoute.Favorites}
           authorizationStatus={AuthorizationStatus.NoAuth}
         >
-          <FavoritesScreen />
+          <FavoritesScreen offers={offers} />
         </PrivateRoute>
         <Route path={AppRoute.Room} exact>
           <RoomScreen />
