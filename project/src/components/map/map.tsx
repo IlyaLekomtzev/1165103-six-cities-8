@@ -17,15 +17,15 @@ function Map({ city, offers, active }: mapPropsTypes): JSX.Element {
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: MapIcon.Default,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: [27, 39],
+    iconAnchor: [0, 0],
   });
 
   //eslint-disable-next-line
   const currentCustomIcon = leaflet.icon({
     iconUrl: MapIcon.Current,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: [27, 39],
+    iconAnchor: [0, 0],
   });
 
   useEffect(() => {
