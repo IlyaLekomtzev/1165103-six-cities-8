@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import Header from '../header/header';
 import OffersList from '../offers-list/offers-list';
+import Map from '../map/map';
 import { Offer } from '../../types/offers';
 
 type mainScreenPropsTypes = {
@@ -7,6 +9,9 @@ type mainScreenPropsTypes = {
 };
 
 function MainScreen({ offers }: mainScreenPropsTypes): JSX.Element {
+  const defaultActiveOffer = 0;
+  const [activeOffer, setActiveOffer] = useState<number>(defaultActiveOffer);
+
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -72,10 +77,18 @@ function MainScreen({ offers }: mainScreenPropsTypes): JSX.Element {
                     <li className="places__option" tabIndex={0}>Top rated first</li>
                   </ul>
                 </form>
-                <OffersList offers={offers} />
+                <OffersList
+                  offers={offers}
+                  onMouseEnter={(id) => setActiveOffer(id)}
+                  onMouseLeave={() => setActiveOffer(defaultActiveOffer)}
+                />
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map" />
+                <Map
+                  city={offers[0].city}
+                  offers={offers}
+                  active={activeOffer}
+                />
               </div>
             </div>
           </div>
