@@ -88,6 +88,7 @@ function MainScreen({ offers }: mainScreenPropsTypes): JSX.Element {
                   city={offers[0].city}
                   offers={offers}
                   active={activeOffer}
+                  className="cities__map"
                 />
               </div>
             </div>

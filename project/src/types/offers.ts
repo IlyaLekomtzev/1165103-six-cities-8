@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export type Location = {
   latitude: number;
   longitude: number;
@@ -14,12 +16,7 @@ export type Offer = {
   city: City;
   description: string;
   goods: string[];
-  host: {
-    avatarUrl: string;
-    id: number;
-    isPro: boolean;
-    name: string;
-  };
+  host: User;
   id: number;
   images: string[];
   isFavorite: boolean;
