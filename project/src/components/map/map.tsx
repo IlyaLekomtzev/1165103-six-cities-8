@@ -21,7 +21,6 @@ function Map({ city, offers, active }: mapPropsTypes): JSX.Element {
     iconAnchor: [0, 0],
   });
 
-  //eslint-disable-next-line
   const currentCustomIcon = leaflet.icon({
     iconUrl: MapIcon.Current,
     iconSize: [27, 39],
