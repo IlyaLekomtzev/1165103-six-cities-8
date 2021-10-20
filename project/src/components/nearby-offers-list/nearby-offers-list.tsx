@@ -6,13 +6,17 @@ type nearbyOffersListPropsTypes = {
 }
 
 function NearbyOffersList({ offers }: nearbyOffersListPropsTypes): JSX.Element {
+  const renderCards = () => (
+    offers.length > 0 ? (
+      offers.map((offer) => <NearbyOfferCard key={offer.id} offer={offer} />)
+    ) : (
+      <div>Not Found</div>
+    )
+  );
+
   return (
     <div className="near-places__list places__list">
-      {offers.length > 0 ? (
-        offers.map((offer) => <NearbyOfferCard key={offer.id} offer={offer} />)
-      ) : (
-        <div>Not Found</div>
-      )}
+      {renderCards()}
     </div>
   );
 }

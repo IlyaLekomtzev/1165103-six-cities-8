@@ -20,6 +20,14 @@ function RoomScreen(): JSX.Element {
   const nearbyOffers = offers.filter((item) => +id !== item.id);
   const offersMap = [...nearbyOffers, offer];
 
+  const renderInsideList = () => (
+    offer.goods && offer.goods.map((item) => (
+      <li key={item} className="property__inside-item">
+        {item}
+      </li>
+    ))
+  );
+
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -75,11 +83,7 @@ function RoomScreen(): JSX.Element {
                 <div className="property__inside">
                   <h2 className="property__inside-title">What`s inside</h2>
                   <ul className="property__inside-list">
-                    {offer.goods && offer.goods.map((item) => (
-                      <li key={item} className="property__inside-item">
-                        {item}
-                      </li>
-                    ))}
+                    {renderInsideList()}
                   </ul>
                 </div>
                 <div className="property__host">
@@ -113,7 +117,7 @@ function RoomScreen(): JSX.Element {
               city={offers[0].city}
               offers={offersMap}
               active={+id}
-              className="property__map"
+              mapMainClassName="property__map"
             />
           </section>
           <div className="container">
