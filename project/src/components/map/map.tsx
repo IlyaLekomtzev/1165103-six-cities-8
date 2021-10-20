@@ -7,11 +7,12 @@ import { MapIcon } from '../../const';
 
 type mapPropsTypes = {
   city: City;
-  offers: Offer[];
-  active: number;
+  offers?: Offer[];
+  active?: number;
+  mapMainClassName?: string;
 }
 
-function Map({ city, offers, active }: mapPropsTypes): JSX.Element {
+function Map({ city, offers, active = 0, mapMainClassName }: mapPropsTypes): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city.location);
 
@@ -28,7 +29,7 @@ function Map({ city, offers, active }: mapPropsTypes): JSX.Element {
   });
 
   useEffect(() => {
-    if (map) {
+    if (map && offers) {
       offers.forEach((offer) => {
         leaflet
           .marker({
@@ -44,7 +45,7 @@ function Map({ city, offers, active }: mapPropsTypes): JSX.Element {
 
   return (
     <section
-      className="cities__map map"
+      className={`${mapMainClassName} map`}
       ref={mapRef}
     />
   );
