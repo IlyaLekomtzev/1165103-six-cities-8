@@ -114,7 +114,7 @@ function RoomScreen(): JSX.Element {
               </div>
             </div>
             <Map
-              city={offers[0].city}
+              city={offer.city}
               offers={offersMap}
               active={+id}
               mapMainClassName="property__map"
