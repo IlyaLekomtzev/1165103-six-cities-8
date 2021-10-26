@@ -1,12 +1,8 @@
 import Header from '../header/header';
 import { Link } from 'react-router-dom';
-import { Offer } from '../../types/offers';
+import { offers } from '../../mocks/offers';
 
-type favoritesScreenPropsTypes = {
-  offers: Offer[];
-};
-
-function FavoritesScreen({ offers }: favoritesScreenPropsTypes): JSX.Element {
+function FavoritesScreen(): JSX.Element {
   return (
     <>
       <div style={{ display: 'none' }}>
