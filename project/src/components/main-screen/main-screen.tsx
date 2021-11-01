@@ -11,7 +11,7 @@ import { cities } from '../../const';
 function MainScreen(): JSX.Element {
   const defaultActiveOffer = 0;
   const [activeOffer, setActiveOffer] = useState<number>(defaultActiveOffer);
-  const { city, offers: storeOffers, isLoading } = useSelector((state: State) => state);
+  const { city, offers: storeOffers, isLoading, error } = useSelector((state: State) => state);
 
   const offers = storeOffers.filter((offer) => offer.city.name === city);
 
@@ -61,6 +61,7 @@ function MainScreen(): JSX.Element {
                       />
                     )
                 }
+                {error && <h3>{error}</h3>}
               </section>
               <div className="cities__right-section">
                 {offers.length ? (

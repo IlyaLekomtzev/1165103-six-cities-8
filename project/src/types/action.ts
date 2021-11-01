@@ -10,6 +10,7 @@ export enum ActionType {
   SetCity = 'offers/setCity',
   SetOffers = 'offers/setOffers',
   SetIsLoading = 'offers/setIsLoading',
+  SetError = 'offers/setError',
 }
 
 type InferValueTypes<T> = T extends {[key: string]: infer U} ? U : never;
