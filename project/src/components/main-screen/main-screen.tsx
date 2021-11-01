@@ -1,24 +1,19 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Header from '../header/header';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 import CitiesList from '../cities-list/cities-list';
+import Spinner from '../spinner/spinner';
 import { State } from '../../types/state';
-import { setOffers } from '../../store/action';
 import { cities } from '../../const';
-import { offers } from '../../mocks/offers';
 
 function MainScreen(): JSX.Element {
   const defaultActiveOffer = 0;
   const [activeOffer, setActiveOffer] = useState<number>(defaultActiveOffer);
+  const { city, offers: storeOffers, isLoading } = useSelector((state: State) => state);
 
-  const dispatch = useDispatch();
-  const { city, offers: storeOffers } = useSelector((state: State) => state);
-
-  useEffect(() => {
-    dispatch(setOffers(offers.filter((offer) => offer.city.name === city)));
-  }, [city]);
+  const offers = storeOffers.filter((offer) => offer.city.name === city);
 
   return (
     <>
@@ -36,7 +31,7 @@ function MainScreen(): JSX.Element {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{storeOffers.length} places to stay in {city}</b>
+                <b className="places__found">{offers.length} places to stay in {city}</b>
                 <form className="places__sorting" action="/" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex={0}>
@@ -52,17 +47,26 @@ function MainScreen(): JSX.Element {
                     <li className="places__option" tabIndex={0}>Top rated first</li>
                   </ul>
                 </form>
-                <OffersList
-                  offers={storeOffers}
-                  onMouseEnter={(id) => setActiveOffer(id)}
-                  onMouseLeave={() => setActiveOffer(defaultActiveOffer)}
-                />
+
+                {
+                  isLoading
+                    ?
+                    (<Spinner />)
+                    :
+                    (
+                      <OffersList
+                        offers={offers}
+                        onMouseEnter={(id) => setActiveOffer(id)}
+                        onMouseLeave={() => setActiveOffer(defaultActiveOffer)}
+                      />
+                    )
+                }
               </section>
               <div className="cities__right-section">
-                {storeOffers.length ? (
+                {offers.length ? (
                   <Map
-                    city={storeOffers[0].city}
-                    offers={storeOffers}
+                    city={offers[0].city}
+                    offers={offers}
                     active={activeOffer}
                     mapMainClassName="cities__map"
                   />

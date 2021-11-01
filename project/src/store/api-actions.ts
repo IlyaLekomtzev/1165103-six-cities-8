@@ -1,0 +1,18 @@
+import { ThunkActionResult } from '../types/action';
+import { setIsLoading, setOffers } from './action';
+import { APIRoute } from '../const';
+import { Offer } from '../types/offers';
+import { convertSnakeToCamelCase } from '../utils/convertSnakeToCamelCase';
+
+export const fetchOffersAction = (): ThunkActionResult => async (dispatch, _getState, api): Promise<void> => {
+  dispatch(setIsLoading(true));
+  try {
+    const { data } = await api.get<Offer[]>(APIRoute.Offers);
+    const adaptedData = data.map((item) => convertSnakeToCamelCase(item));
+    dispatch(setOffers(adaptedData));
+  } catch (e) {
+    //eslint-disable-next-line
+    console.error(e);
+  }
+  dispatch(setIsLoading(false));
+};
