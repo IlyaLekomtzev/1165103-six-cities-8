@@ -9,6 +9,11 @@ export const setCity = (city: string) => ({
   payload: city,
 } as const);
 
+export const setSort = (sort: string) => ({
+  type: inferLiteralFromString(ActionType.SetSort),
+  payload: sort,
+} as const);
+
 export const setOffers = (offers: Offer[]) => ({
   type: inferLiteralFromString(ActionType.SetOffers),
   payload: offers,

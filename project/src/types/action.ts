@@ -8,6 +8,7 @@ import * as actions from '../store/action';
 
 export enum ActionType {
   SetCity = 'offers/setCity',
+  SetSort = 'offers/setSort',
   SetOffers = 'offers/setOffers',
   SetIsLoading = 'offers/setIsLoading',
   SetError = 'offers/setError',
