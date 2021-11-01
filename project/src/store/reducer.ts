@@ -5,6 +5,8 @@ import { cities } from '../const';
 const initialState: State = {
   city: cities[0],
   offers: [],
+  isLoading: false,
+  error: '',
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -13,6 +15,10 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return { ...state, city: action.payload };
     case ActionType.SetOffers:
       return { ...state, offers: action.payload };
+    case ActionType.SetIsLoading:
+      return { ...state, isLoading: action.payload };
+    case ActionType.SetError:
+      return { ...state, error: action.payload };
     default:
       return state;
   }

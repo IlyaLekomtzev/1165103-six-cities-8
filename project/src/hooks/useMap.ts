@@ -28,6 +28,10 @@ function useMap(mapRef: React.RefObject<HTMLInputElement>, city: Location): mapT
 
       setMap(instance);
     }
+
+    if (mapRef.current !== null && map !== null) {
+      map.setView([city.latitude, city.longitude], city.zoom);
+    }
   }, [mapRef, map, city]);
 
   return map;

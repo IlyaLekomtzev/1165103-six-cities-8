@@ -13,3 +13,13 @@ export const setOffers = (offers: Offer[]) => ({
   type: inferLiteralFromString(ActionType.SetOffers),
   payload: offers,
 } as const);
+
+export const setIsLoading = (isLoading: boolean) => ({
+  type: inferLiteralFromString(ActionType.SetIsLoading),
+  payload: isLoading,
+} as const);
+
+export const setError = (error: string) => ({
+  type: inferLiteralFromString(ActionType.SetError),
+  payload: error,
+} as const);
