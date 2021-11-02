@@ -13,45 +13,27 @@ type offersListPropsTypes = {
 function OffersList({ offers, onMouseEnter, onMouseLeave }: offersListPropsTypes): JSX.Element {
   const { sort } = useSelector((state: State) => state);
 
-  const renderCards = () => {
+  const getSortedOffers = () => {
     switch (sort) {
       case OffersSortValue.PriceLowToHigh:
-        offers = offers.sort((a, b) => {
-          if (a.price > b.price) {
-            return 1;
-          }
-          if (a.price < b.price) {
-            return -1;
-          }
-          return 0;
-        });
+        offers = offers.sort((a, b) => a.price - b.price);
         break;
       case OffersSortValue.PriceHighToLow:
-        offers = offers.sort((a, b) => {
-          if (a.price < b.price) {
-            return 1;
-          }
-          if (a.price > b.price) {
-            return -1;
-          }
-          return 0;
-        });
+        offers = offers.sort((a, b) => b.price - a.price);
         break;
       case OffersSortValue.TopRatedFirst:
-        offers = offers.sort((a, b) => {
-          if (a.rating < b.rating) {
-            return 1;
-          }
-          if (a.rating > b.rating) {
-            return -1;
-          }
-          return 0;
-        });
+        offers = offers.sort((a, b) => b.rating - a.rating);
         break;
     }
 
+    return offers;
+  };
+
+  const renderCards = () => {
+    const sortedOffers = getSortedOffers();
+
     return (
-      offers.map((offer) => (
+      sortedOffers.map((offer) => (
         <OfferCard
           key={offer.id}
           offer={offer}

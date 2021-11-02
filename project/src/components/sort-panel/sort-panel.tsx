@@ -9,6 +9,23 @@ function SortPanel(): JSX.Element {
   const { sort } = useSelector((state: State) => state);
   const dispatch = useDispatch();
 
+  const renderItems = () => {
+    if (offersSortValues) {
+      return (
+        offersSortValues.map((sortValue) => (
+          <li
+            className={`places__option ${sort === sortValue.value && 'places__option--active'}`}
+            tabIndex={0}
+            key={sortValue.value}
+            onClick={() => dispatch(setSort(sortValue.value))}
+          >
+            {sortValue.title}
+          </li>
+        ))
+      );
+    }
+  };
+
   return (
     <form className="places__sorting" action="/" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -19,16 +36,7 @@ function SortPanel(): JSX.Element {
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOpened && 'places__options--opened'}`}>
-        {offersSortValues && offersSortValues.map((sortValue) => (
-          <li
-            className={`places__option ${sort === sortValue.value && 'places__option--active'}`}
-            tabIndex={0}
-            key={sortValue.value}
-            onClick={() => dispatch(setSort(sortValue.value))}
-          >
-            {sortValue.title}
-          </li>
-        ))}
+        {renderItems()}
       </ul>
     </form>
   );
