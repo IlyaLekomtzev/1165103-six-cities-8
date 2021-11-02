@@ -1,8 +1,6 @@
-import { Offer } from '../types/offers';
-
 const capitalizeFirstLetter = (str: string): string => str[0].toUpperCase() + str.slice(1);
 
-export const convertSnakeToCamelCase = (obj: any): Offer => {
+export const convertSnakeToCamelCase = (obj: any) => {
   const newObj: any = {};
 
   if (obj) {

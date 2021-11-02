@@ -9,11 +9,11 @@ import Spinner from '../spinner/spinner';
 import { State } from '../../types/state';
 import { cities } from '../../const';
 
-function MainScreen(): JSX.Element {
-  const defaultActiveOffer = 0;
-  const [activeOffer, setActiveOffer] = useState<number>(defaultActiveOffer);
-  const { city, offers: storeOffers, isLoading, error } = useSelector((state: State) => state);
+const DEFAULT_ACTIVE_OFFER = 0;
 
+function MainScreen(): JSX.Element {
+  const [activeOffer, setActiveOffer] = useState<number>(DEFAULT_ACTIVE_OFFER);
+  const { city, offers: storeOffers, isLoading, error } = useSelector(({ OFFERS }: State) => OFFERS);
   const offers = storeOffers.filter((offer) => offer.city.name === city);
 
   return (
@@ -41,7 +41,7 @@ function MainScreen(): JSX.Element {
                   <OffersList
                     offers={offers}
                     onMouseEnter={(id) => setActiveOffer(id)}
-                    onMouseLeave={() => setActiveOffer(defaultActiveOffer)}
+                    onMouseLeave={() => setActiveOffer(DEFAULT_ACTIVE_OFFER)}
                   />
                 )}
               </section>
