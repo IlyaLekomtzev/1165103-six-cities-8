@@ -14,48 +14,38 @@ function Header(): JSX.Element {
   };
 
   const renderAuthInfo = () => {
-    switch (authorizationStatus) {
-      case AuthorizationStatus.Auth:
-        return (
-          <>
-            <li className="header__nav-item user">
-              <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
-                <div
-                  className="header__avatar-wrapper user__avatar-wrapper"
-                  style={{ backgroundImage: `url(${user.avatarUrl})` }}
-                />
-                <span className="header__user-name user__name">{user.email ? user.email : ''}</span>
-              </Link>
-            </li>
-            <li className="header__nav-item">
-              <a
-                href={AppRoute.Main}
-                className="header__nav-link"
-                onClick={handleLogoutClick}
-              >
-                <span className="header__signout">Sign out</span>
-              </a>
-            </li>
-          </>
-        );
-
-      case AuthorizationStatus.NoAuth:
-        return (
-          <li className="header__nav-item">
-            <Link to={AppRoute.Login} className="header__nav-link">
-              <span className="header__signin">Sign in</span>
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      return (
+        <>
+          <li className="header__nav-item user">
+            <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
+              <div
+                className="header__avatar-wrapper user__avatar-wrapper"
+                style={{ backgroundImage: `url(${user.avatarUrl})` }}
+              />
+              <span className="header__user-name user__name">{user.email ? user.email : ''}</span>
             </Link>
           </li>
-        );
-      default:
-        return (
           <li className="header__nav-item">
-            <Link to={AppRoute.Login} className="header__nav-link">
-              <span className="header__signin">Sign in</span>
-            </Link>
+            <a
+              href={AppRoute.Main}
+              className="header__nav-link"
+              onClick={handleLogoutClick}
+            >
+              <span className="header__signout">Sign out</span>
+            </a>
           </li>
-        );
+        </>
+      );
     }
+
+    return (
+      <li className="header__nav-item">
+        <Link to={AppRoute.Login} className="header__nav-link">
+          <span className="header__signin">Sign in</span>
+        </Link>
+      </li>
+    );
   };
 
   return (
