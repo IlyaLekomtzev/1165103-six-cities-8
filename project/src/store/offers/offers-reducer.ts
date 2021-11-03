@@ -1,8 +1,8 @@
-import { ActionType, Actions } from '../types/action';
-import { State } from '../types/state';
-import { cities, OffersSortValue } from '../const';
+import { ActionType, Actions } from '../../types/action';
+import { OffersReducerState } from '../../types/state';
+import { cities, OffersSortValue } from '../../const';
 
-const initialState: State = {
+const initialState: OffersReducerState = {
   city: cities[0],
   sort: OffersSortValue.Popular,
   offers: [],
@@ -10,7 +10,7 @@ const initialState: State = {
   error: '',
 };
 
-const reducer = (state: State = initialState, action: Actions): State => {
+const offersReducer = (state: OffersReducerState = initialState, action: Actions): OffersReducerState => {
   switch (action.type) {
     case ActionType.SetCity:
       return { ...state, city: action.payload };
@@ -27,4 +27,4 @@ const reducer = (state: State = initialState, action: Actions): State => {
   }
 };
 
-export { reducer };
+export { offersReducer };

@@ -11,7 +11,7 @@ type offersListPropsTypes = {
 };
 
 function OffersList({ offers, onMouseEnter, onMouseLeave }: offersListPropsTypes): JSX.Element {
-  const { sort } = useSelector((state: State) => state);
+  const sort = useSelector(({ OFFERS }: State) => OFFERS.sort);
 
   const getSortedOffers = () => {
     switch (sort) {

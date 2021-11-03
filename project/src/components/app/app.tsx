@@ -1,15 +1,16 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Router as BrowserRouter, Switch, Route } from 'react-router-dom';
 import MainScreen from '../main-screen/main-screen';
 import LoginScreen from '../login-screen/login-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import RoomScreen from '../room-screen/room-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
+import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route path={AppRoute.Main} exact>
           <MainScreen />
@@ -20,7 +21,6 @@ function App(): JSX.Element {
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
-          authorizationStatus={AuthorizationStatus.Auth}
         >
           <FavoritesScreen />
         </PrivateRoute>

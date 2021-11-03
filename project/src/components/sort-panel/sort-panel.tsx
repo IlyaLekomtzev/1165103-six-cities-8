@@ -6,7 +6,7 @@ import { State } from '../../types/state';
 
 function SortPanel(): JSX.Element {
   const [isOpened, setIsOpened] = useState(false);
-  const { sort } = useSelector((state: State) => state);
+  const sort = useSelector(({ OFFERS }: State) => OFFERS.sort);
   const dispatch = useDispatch();
 
   const renderItems = () => {
