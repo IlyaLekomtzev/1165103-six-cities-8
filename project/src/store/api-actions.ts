@@ -25,6 +25,8 @@ import { Offer } from '../types/offers';
 const NO_AUTH_MESSAGE = 'Не забудьте авторизоваться';
 const AUTH_FAIL_MESSAGE = 'Не удалось авторизоваться. Проверьте введённые данные';
 const AUTH_SUCCESS_MESSAGE = 'Вы успешно авторизованы';
+const SEND_REVIEW_SUCCESS_MESSAGE = 'Отзыв успешно отправлен';
+const SEND_REVIEW_FAIL_MESSAGE = 'Не удалось отправить отзыв';
 
 export const fetchOffersAction = (): ThunkActionResult => async (dispatch, _getState, api): Promise<void> => {
   dispatch(setIsLoading(true));
@@ -98,7 +100,12 @@ type sendReviewType = SendReview & {
 }
 
 export const sendReview = ({ id, rating, comment }: sendReviewType): ThunkActionResult => async (dispatch, _getState, api) => {
-  const { data } = await api.post(`${APIRoute.Comments}/${id}`, { rating, comment });
-  const adaptedData: Review[] = data.map((review: any) => convertSnakeToCamelCase(review));
-  dispatch(setReviews(adaptedData));
+  try {
+    const { data } = await api.post(`${APIRoute.Comments}/${id}`, { rating, comment });
+    const adaptedData: Review[] = data.map((review: any) => convertSnakeToCamelCase(review));
+    dispatch(setReviews(adaptedData));
+    toast.success(SEND_REVIEW_SUCCESS_MESSAGE);
+  } catch {
+    toast.error(SEND_REVIEW_FAIL_MESSAGE);
+  }
 };
