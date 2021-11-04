@@ -1,14 +1,27 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import RatingStarsRadioGroup from '../rating-stars-radio-group/rating-stars-radio-group';
+import { sendReview } from '../../store/api-actions';
 
-function ReviewsForm(): JSX.Element {
+type reviewsFormPropsTypes = {
+  id: string;
+}
+
+function ReviewsForm({ id }: reviewsFormPropsTypes): JSX.Element {
   const [formState, setFormState] = useState({
     rating: 0,
     message: '',
   });
+  const dispatch = useDispatch();
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(sendReview({ id, rating: formState.rating, comment: formState.message }));
+    setFormState((state) => ({ ...state, message: '' }));
+  };
 
   return (
-    <form className="reviews__form form" action="/" method="post">
+    <form className="reviews__form form" action="/" method="post" onSubmit={handleFormSubmit}>
       <RatingStarsRadioGroup
         label="Your review"
         onChange={(event) => setFormState({ ...formState, rating: Number(event.target.value) })}
@@ -18,8 +31,8 @@ function ReviewsForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={formState.message}
-        onChange={(event) => setFormState({...formState, message: event.target.value})}
+        value={formState.message}
+        onChange={(event) => setFormState({ ...formState, message: event.target.value })}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

@@ -7,3 +7,8 @@ export type Review = {
   rating: number;
   user: User;
 };
+
+export type SendReview = {
+  rating: number;
+  comment: string;
+};

@@ -1,4 +1,4 @@
-import { Router as BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Router as BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import MainScreen from '../main-screen/main-screen';
 import LoginScreen from '../login-screen/login-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
@@ -27,9 +27,10 @@ function App(): JSX.Element {
         <Route path={AppRoute.Room} exact>
           <RoomScreen />
         </Route>
-        <Route>
+        <Route path={AppRoute.NotFound} exact>
           <NotFoundScreen />
         </Route>
+        <Redirect to={AppRoute.NotFound} />
       </Switch>
     </BrowserRouter>
   );
