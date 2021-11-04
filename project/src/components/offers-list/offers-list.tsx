@@ -45,7 +45,7 @@ function OffersList({ offers, onMouseEnter, onMouseLeave }: offersListPropsTypes
   };
 
   if (offers.length === 0) {
-    return <h3>Offers not found</h3>;
+    return <h3>No places to stay available</h3>;
   }
 
   return (

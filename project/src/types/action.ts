@@ -17,6 +17,12 @@ export enum ActionType {
   SetUserData = 'auth/setUserData',
   RedirectToRoute = 'auth/redirectToRoute',
   RequireLogout = 'auth/requireLogout',
+
+  SetOffer = 'room/setOffer',
+  SetReviews = 'room/setReviews',
+  SetNearbyOffers = 'room/setNearbyOffers',
+  SetIsLoadingRoom = 'room/setIsLoadingRoom',
+  SetErrorRoom = 'room/setErrorRoom',
 }
 
 type InferValueTypes<T> = T extends {[key: string]: infer U} ? U : never;

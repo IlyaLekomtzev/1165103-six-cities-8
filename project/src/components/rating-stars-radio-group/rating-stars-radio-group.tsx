@@ -11,23 +11,23 @@ function RatingStarsRadioGroup({ label, onChange }: ratingStarsRadioGroupPropsTy
       <label className="reviews__label form__label" htmlFor="review">{label}</label>
       <div className="reviews__rating-form form__rating">
         <RatingStarRadioItem
-          defaultValue={5}
+          value={5}
           onChange={onChange}
         />
         <RatingStarRadioItem
-          defaultValue={4}
+          value={4}
           onChange={onChange}
         />
         <RatingStarRadioItem
-          defaultValue={3}
+          value={3}
           onChange={onChange}
         />
         <RatingStarRadioItem
-          defaultValue={2}
+          value={2}
           onChange={onChange}
         />
         <RatingStarRadioItem
-          defaultValue={1}
+          value={1}
           onChange={onChange}
         />
       </div>

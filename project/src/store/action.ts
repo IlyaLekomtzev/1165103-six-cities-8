@@ -1,5 +1,6 @@
 import { ActionType } from '../types/action';
 import { Offer } from '../types/offers';
+import { Review } from '../types/reviews';
 import { UserData } from '../types/auth-data';
 import { AppRoute } from '../const';
 
@@ -48,4 +49,29 @@ export const redirectToRoute = (url: AppRoute) => ({
 
 export const requireLogout = () => ({
   type: inferLiteralFromString(ActionType.RequireLogout),
+} as const);
+
+export const setOffer = (offer: Offer) => ({
+  type: inferLiteralFromString(ActionType.SetOffer),
+  payload: offer,
+} as const);
+
+export const setReviews = (reviews: Review[]) => ({
+  type: inferLiteralFromString(ActionType.SetReviews),
+  payload: reviews,
+} as const);
+
+export const setNearbyOffers = (offers: Offer[]) => ({
+  type: inferLiteralFromString(ActionType.SetNearbyOffers),
+  payload: offers,
+} as const);
+
+export const setIsLoadingRoom = (payload: boolean) => ({
+  type: inferLiteralFromString(ActionType.SetIsLoadingRoom),
+  payload,
+} as const);
+
+export const setErrorRoom = (error: string) => ({
+  type: inferLiteralFromString(ActionType.SetErrorRoom),
+  payload: error,
 } as const);
