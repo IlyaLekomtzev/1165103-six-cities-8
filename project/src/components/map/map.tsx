@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, memo } from 'react';
 import useMap from '../../hooks/useMap';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -51,4 +51,4 @@ function Map({ city, offers, active = 0, mapMainClassName }: mapPropsTypes): JSX
   );
 }
 
-export default Map;
+export default memo(Map);

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCity } from '../../store/action';
 
@@ -37,4 +38,4 @@ function CitiesList({ cities, selectedCity }: citiesListPropsTypes): JSX.Element
   );
 }
 
-export default CitiesList;
+export default memo(CitiesList);

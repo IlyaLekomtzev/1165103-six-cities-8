@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type ratingStarRadioItemPropsTypes = {
   value: number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -16,4 +18,4 @@ function RatingStarRadioItem({ value, onChange }: ratingStarRadioItemPropsTypes)
   );
 }
 
-export default RatingStarRadioItem;
+export default memo(RatingStarRadioItem);

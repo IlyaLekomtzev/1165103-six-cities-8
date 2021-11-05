@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import RatingStarRadioItem from '../rating-star-radio-item/rating-star-radio-item';
 
 type ratingStarsRadioGroupPropsTypes = {
@@ -35,4 +36,4 @@ function RatingStarsRadioGroup({ label, onChange }: ratingStarsRadioGroupPropsTy
   );
 }
 
-export default RatingStarsRadioGroup;
+export default memo(RatingStarsRadioGroup);

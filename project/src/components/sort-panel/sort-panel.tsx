@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../../store/action';
 import { offersSortValues } from '../../const';
@@ -42,4 +42,4 @@ function SortPanel(): JSX.Element {
   );
 }
 
-export default SortPanel;
+export default memo(SortPanel);

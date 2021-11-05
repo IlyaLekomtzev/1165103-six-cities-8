@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutAction } from '../../store/api-actions';
@@ -68,4 +69,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default Header;
+export default memo(Header);
