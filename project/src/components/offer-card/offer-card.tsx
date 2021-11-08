@@ -1,17 +1,20 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/offers';
 
 type offerCardPropsTypes = {
   offer: Offer;
   onMouseEnter: (id: number) => void;
-  onMouseLeave: () => void;
 };
 
-function OfferCard({ offer, onMouseEnter, onMouseLeave }: offerCardPropsTypes): JSX.Element {
+function OfferCard({ offer, onMouseEnter }: offerCardPropsTypes): JSX.Element {
   const { id, title, previewImage, price, type, isPremium, isFavorite, rating } = offer;
 
   return (
-    <article className="cities__place-card place-card" onMouseEnter={() => onMouseEnter(id)} onMouseLeave={onMouseLeave}>
+    <article
+      className="cities__place-card place-card"
+      onMouseEnter={() => onMouseEnter(id)}
+    >
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
@@ -49,4 +52,4 @@ function OfferCard({ offer, onMouseEnter, onMouseLeave }: offerCardPropsTypes): 
   );
 }
 
-export default OfferCard;
+export default memo(OfferCard);

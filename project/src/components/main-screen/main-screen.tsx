@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import Header from '../header/header';
 import SortPanel from '../sort-panel/sort-panel';
@@ -15,6 +15,10 @@ function MainScreen(): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<number>(DEFAULT_ACTIVE_OFFER);
   const { city, offers: storeOffers, isLoading, error } = useSelector(({ OFFERS }: State) => OFFERS);
   const offers = storeOffers.filter((offer) => offer.city.name === city);
+
+  const handleMouseEnter = useCallback((id: number) => {
+    setActiveOffer(id);
+  }, [activeOffer]);
 
   return (
     <>
@@ -40,8 +44,7 @@ function MainScreen(): JSX.Element {
                 {!isLoading && (
                   <OffersList
                     offers={offers}
-                    onMouseEnter={(id) => setActiveOffer(id)}
-                    onMouseLeave={() => setActiveOffer(DEFAULT_ACTIVE_OFFER)}
+                    onMouseEnter={(id) => handleMouseEnter(id)}
                   />
                 )}
               </section>

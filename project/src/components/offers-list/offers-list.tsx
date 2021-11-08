@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import OfferCard from '../offer-card/offer-card';
 import { Offer } from '../../types/offers';
@@ -7,10 +8,9 @@ import { State } from '../../types/state';
 type offersListPropsTypes = {
   offers: Offer[];
   onMouseEnter: (id: number) => void;
-  onMouseLeave: () => void;
 };
 
-function OffersList({ offers, onMouseEnter, onMouseLeave }: offersListPropsTypes): JSX.Element {
+function OffersList({ offers, onMouseEnter }: offersListPropsTypes): JSX.Element {
   const sort = useSelector(({ OFFERS }: State) => OFFERS.sort);
 
   const getSortedOffers = () => {
@@ -38,7 +38,6 @@ function OffersList({ offers, onMouseEnter, onMouseLeave }: offersListPropsTypes
           key={offer.id}
           offer={offer}
           onMouseEnter={(id) => onMouseEnter(id)}
-          onMouseLeave={() => onMouseLeave()}
         />
       ))
     );
@@ -55,4 +54,4 @@ function OffersList({ offers, onMouseEnter, onMouseLeave }: offersListPropsTypes
   );
 }
 
-export default OffersList;
+export default memo(OffersList);
