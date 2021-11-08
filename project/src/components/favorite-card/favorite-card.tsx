@@ -4,11 +4,11 @@ import { sendFavorite } from '../../store/api-actions';
 import FavoriteButton from '../favorite-button/favorite-button';
 import { Offer } from '../../types/offers';
 
-type nearbyOfferCardPropsTypes = {
+type favoriteCardPropsTypes = {
   offer: Offer;
-}
+};
 
-function NearbyOfferCard({ offer }: nearbyOfferCardPropsTypes): JSX.Element {
+function FavoriteCard({ offer }: favoriteCardPropsTypes): JSX.Element {
   const dispatch = useDispatch();
 
   const handleFavoriteClick = () => {
@@ -16,13 +16,13 @@ function NearbyOfferCard({ offer }: nearbyOfferCardPropsTypes): JSX.Element {
   };
 
   return (
-    <article className="near-places__card place-card">
-      <div className="near-places__image-wrapper place-card__image-wrapper">
+    <article className="favorites__card place-card">
+      <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${offer.id}`}>
-          <img className="place-card__image" src={offer.previewImage} width={260} height={200} alt="Place offer" />
+          <img className="place-card__image" src={offer.previewImage} width={150} height={110} alt={offer.title} />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{offer.price}</b>
@@ -51,4 +51,4 @@ function NearbyOfferCard({ offer }: nearbyOfferCardPropsTypes): JSX.Element {
   );
 }
 
-export default NearbyOfferCard;
+export default FavoriteCard;

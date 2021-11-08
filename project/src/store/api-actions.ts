@@ -11,7 +11,9 @@ import {
   setIsLoadingRoom,
   setReviews,
   setNearbyOffers,
-  setErrorRoom
+  setErrorRoom,
+  setFavoriteOffers,
+  setFavoriteIsLoading
 } from './action';
 
 import { AuthorizationStatus, APIRoute, AppRoute } from '../const';
@@ -27,6 +29,9 @@ const AUTH_FAIL_MESSAGE = 'Не удалось авторизоваться. П�
 const AUTH_SUCCESS_MESSAGE = 'Вы успешно авторизованы';
 const SEND_REVIEW_SUCCESS_MESSAGE = 'Отзыв успешно отправлен';
 const SEND_REVIEW_FAIL_MESSAGE = 'Не удалось отправить отзыв';
+const SEND_FAVORITE_ADD_SUCCESS_MESSAGE = 'Предложение успешно добавлено в избранное';
+const SEND_FAVORITE_REMOVE_SUCCESS_MESSAGE = 'Предложение успешно удалено из избранного';
+const SEND_FAVORITE_FAIL_MESSAGE = 'Не удалось добавить предложение в избранное';
 
 export const fetchOffersAction = (): ThunkActionResult => async (dispatch, _getState, api): Promise<void> => {
   dispatch(setIsLoading(true));
@@ -107,5 +112,36 @@ export const sendReview = ({ id, rating, comment }: sendReviewType): ThunkAction
     toast.success(SEND_REVIEW_SUCCESS_MESSAGE);
   } catch {
     toast.error(SEND_REVIEW_FAIL_MESSAGE);
+  }
+};
+
+export const getFavorites = (): ThunkActionResult => async (dispatch, _getState, api) => {
+  dispatch(setFavoriteIsLoading(true));
+  try {
+    const { data } = await api.get(APIRoute.Favorite);
+    const adaptedData: Offer[] = data.map((offer: any) => convertSnakeToCamelCase(offer));
+    dispatch(setFavoriteOffers(adaptedData));
+  } catch {
+    toast.error(SEND_REVIEW_FAIL_MESSAGE);
+  }
+  dispatch(setFavoriteIsLoading(false));
+};
+
+export const sendFavorite = (id: number, isFavorite: boolean): ThunkActionResult => async (dispatch, _getState, api) => {
+  try {
+    const status = isFavorite ? 0 : 1;
+    const { data } = await api.post(`${APIRoute.Favorite}/${id}/${status}`);
+    const adaptedData: Offer = convertSnakeToCamelCase(data);
+
+    //eslint-disable-next-line
+    console.log(adaptedData);
+
+    dispatch(fetchOffersAction());
+    dispatch(getFavorites());
+    dispatch(getRoom(`${id}`));
+
+    toast.success(adaptedData.isFavorite ? SEND_FAVORITE_ADD_SUCCESS_MESSAGE : SEND_FAVORITE_REMOVE_SUCCESS_MESSAGE);
+  } catch {
+    toast.error(SEND_FAVORITE_FAIL_MESSAGE);
   }
 };
