@@ -133,9 +133,6 @@ export const sendFavorite = (id: number, isFavorite: boolean): ThunkActionResult
     const { data } = await api.post(`${APIRoute.Favorite}/${id}/${status}`);
     const adaptedData: Offer = convertSnakeToCamelCase(data);
 
-    //eslint-disable-next-line
-    console.log(adaptedData);
-
     dispatch(fetchOffersAction());
     dispatch(getFavorites());
     dispatch(getRoom(`${id}`));
