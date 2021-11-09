@@ -75,3 +75,13 @@ export const setErrorRoom = (error: string) => ({
   type: inferLiteralFromString(ActionType.SetErrorRoom),
   payload: error,
 } as const);
+
+export const setFavoriteOffers = (offers: Offer[]) => ({
+  type: inferLiteralFromString(ActionType.SetFavoriteOffers),
+  payload: offers,
+} as const);
+
+export const setFavoriteIsLoading = (payload: boolean) => ({
+  type: inferLiteralFromString(ActionType.SetFavoriteIsLoading),
+  payload,
+} as const);

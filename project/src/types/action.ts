@@ -23,6 +23,9 @@ export enum ActionType {
   SetNearbyOffers = 'room/setNearbyOffers',
   SetIsLoadingRoom = 'room/setIsLoadingRoom',
   SetErrorRoom = 'room/setErrorRoom',
+
+  SetFavoriteOffers = 'favorite/setFavoriteOffers',
+  SetFavoriteIsLoading = 'favorite/setFavoriteIsLoading',
 }
 
 type InferValueTypes<T> = T extends {[key: string]: infer U} ? U : never;

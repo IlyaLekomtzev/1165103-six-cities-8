@@ -12,16 +12,21 @@ export type OffersReducerState = {
 };
 
 export type AuthReducerState = {
-  authorizationStatus: string,
-  user: UserData,
+  authorizationStatus: string;
+  user: UserData;
 };
 
 export type RoomReducerState = {
-  offer: Offer | null,
-  nearbyOffers: Offer[],
-  reviews: Review[],
-  isLoading: boolean,
-  error: string,
-}
+  offer: Offer | null;
+  nearbyOffers: Offer[];
+  reviews: Review[];
+  isLoading: boolean;
+  error: string;
+};
+
+export type FavoriteReducerState = {
+  offers: Offer[];
+  isLoading: boolean;
+};
 
 export type State = RootState;

@@ -1,11 +1,16 @@
-import { Offer } from '../../types/offers';
+import { useDispatch } from 'react-redux';
+import { sendFavorite } from '../../store/api-actions';
 import DetailHost from '../detail-host/detail-host';
+import FavoriteButton from '../favorite-button/favorite-button';
+import { Offer } from '../../types/offers';
 
 type detailInfoPropsTypes = {
   offer: Offer;
 }
 
 function DetailInfo({ offer }: detailInfoPropsTypes): JSX.Element {
+  const dispatch = useDispatch();
+
   const renderInsideList = () => (
     offer.goods && offer.goods.map((item) => (
       <li key={item} className="property__inside-item">
@@ -13,6 +18,10 @@ function DetailInfo({ offer }: detailInfoPropsTypes): JSX.Element {
       </li>
     ))
   );
+
+  const handleFavoriteClick = () => {
+    dispatch(sendFavorite(offer.id, offer.isFavorite));
+  };
 
   return (
     <>
@@ -25,12 +34,13 @@ function DetailInfo({ offer }: detailInfoPropsTypes): JSX.Element {
         <h1 className="property__name">
           {offer.title}
         </h1>
-        <button className={`property__bookmark-button button ${offer.isFavorite ? 'property__bookmark-button--active' : ''}`} type="button">
-          <svg className="property__bookmark-icon" width={31} height={33}>
-            <use xlinkHref="#icon-bookmark" />
-          </svg>
-          <span className="visually-hidden">To bookmarks</span>
-        </button>
+        <FavoriteButton
+          parentClassName="property"
+          isFavorite={offer.isFavorite}
+          width={31}
+          height={33}
+          onClick={handleFavoriteClick}
+        />
       </div>
       <div className="property__rating rating">
         <div className="property__stars rating__stars">

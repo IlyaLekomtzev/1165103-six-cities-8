@@ -6,6 +6,7 @@ import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 import CitiesList from '../cities-list/cities-list';
 import Spinner from '../spinner/spinner';
+import MainEmpty from '../main-empty/main-empty';
 import { State } from '../../types/state';
 import { cities } from '../../const';
 
@@ -20,6 +21,45 @@ function MainScreen(): JSX.Element {
     setActiveOffer(id);
   }, [activeOffer]);
 
+  const renderOffers = () => {
+    if (isLoading) {
+      return <Spinner />;
+    }
+
+    if (error || offers.length === 0) {
+      return <MainEmpty />;
+    } else {
+      return (
+        <div className="cities__places-container container">
+          <section className="cities__places places">
+            <h2 className="visually-hidden">Places</h2>
+            <b className="places__found">{offers.length} places to stay in {city}</b>
+            <SortPanel />
+
+            {!isLoading && (
+              <OffersList
+                offers={offers}
+                onMouseEnter={(id) => handleMouseEnter(id)}
+              />
+            )}
+          </section>
+          <div className="cities__right-section">
+            {offers.length ? (
+              <Map
+                city={offers[0].city}
+                offers={offers}
+                active={activeOffer}
+                mapMainClassName="cities__map"
+              />
+            ) : (
+              <section className="cities__map map" />
+            )}
+          </div>
+        </div>
+      );
+    }
+  };
+
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -33,34 +73,7 @@ function MainScreen(): JSX.Element {
             <CitiesList cities={cities} selectedCity={city} />
           </div>
           <div className="cities">
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{offers.length} places to stay in {city}</b>
-                <SortPanel />
-
-                {error && <h3>{error}</h3>}
-                {isLoading && <Spinner />}
-                {!isLoading && (
-                  <OffersList
-                    offers={offers}
-                    onMouseEnter={(id) => handleMouseEnter(id)}
-                  />
-                )}
-              </section>
-              <div className="cities__right-section">
-                {offers.length ? (
-                  <Map
-                    city={offers[0].city}
-                    offers={offers}
-                    active={activeOffer}
-                    mapMainClassName="cities__map"
-                  />
-                ) : (
-                  <section className="cities__map map" />
-                )}
-              </div>
-            </div>
+            {renderOffers()}
           </div>
         </main>
       </div>

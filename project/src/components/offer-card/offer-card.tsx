@@ -1,5 +1,8 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { sendFavorite } from '../../store/api-actions';
+import FavoriteButton from '../favorite-button/favorite-button';
 import { Offer } from '../../types/offers';
 
 type offerCardPropsTypes = {
@@ -8,7 +11,12 @@ type offerCardPropsTypes = {
 };
 
 function OfferCard({ offer, onMouseEnter }: offerCardPropsTypes): JSX.Element {
+  const dispatch = useDispatch();
   const { id, title, previewImage, price, type, isPremium, isFavorite, rating } = offer;
+
+  const handleFavoriteClick = () => {
+    dispatch(sendFavorite(id, isFavorite));
+  };
 
   return (
     <article
@@ -30,12 +38,13 @@ function OfferCard({ offer, onMouseEnter }: offerCardPropsTypes): JSX.Element {
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isFavorite && 'place-card__bookmark-button--active'}`} type="button">
-            <svg className="place-card__bookmark-icon" width={18} height={19}>
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton
+            parentClassName="place-card"
+            isFavorite={isFavorite}
+            width={18}
+            height={19}
+            onClick={handleFavoriteClick}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
