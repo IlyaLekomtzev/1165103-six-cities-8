@@ -1,4 +1,4 @@
-const AUTH_TOKEN_KEY_NAME = 'auth-token';
+export const AUTH_TOKEN_KEY_NAME = 'auth-token';
 
 export type Token = string;
 

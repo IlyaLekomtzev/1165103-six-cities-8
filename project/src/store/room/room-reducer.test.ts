@@ -2,7 +2,6 @@ import { roomReducer } from './room-reducer';
 import { RoomReducerState } from '../../types/state';
 import { setOffer, setReviews, setNearbyOffers, setIsLoadingRoom, setErrorRoom } from '../action';
 import { makeFakeOffer, makeFakeReview } from '../../utils/mocks';
-//import { cities, OffersSortValue } from '../../const';
 
 const initialState: RoomReducerState = {
   offer: null,
