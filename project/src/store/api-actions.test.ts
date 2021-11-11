@@ -12,7 +12,7 @@ import {
   requireLogout,
   setReviews,
   setFavoriteIsLoading,
-  setFavoriteOffers
+  setFavoriteOffers,
 } from './action';
 import {
   checkAuthAction,
@@ -21,8 +21,6 @@ import {
   logoutAction,
   sendReview,
   getFavorites,
-  sendFavorite,
-  getRoom
 } from './api-actions';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { State } from '../types/state';
@@ -96,7 +94,7 @@ describe('Async actions', () => {
     expect(store.getActions()).toEqual([
       setIsLoading(true),
       setOffers(mockOffers),
-      setIsLoading(false)
+      setIsLoading(false),
     ]);
   });
 
@@ -119,7 +117,7 @@ describe('Async actions', () => {
     const fakeComment: SendReview & { id: string } = { id: '1', comment: 'Lorem ipsum', rating: 5 };
     const mockReviews = Array(5).fill(makeFakeReview());
     mockAPI
-      .onPost(APIRoute.Comments + '/' + fakeComment.id)
+      .onPost(`${APIRoute.Comments}/${fakeComment.id}`)
       .reply(200, mockReviews);
 
     const store = mockStore();
@@ -127,7 +125,7 @@ describe('Async actions', () => {
     await store.dispatch(sendReview(fakeComment));
 
     expect(store.getActions()).toEqual([
-      setReviews(mockReviews)
+      setReviews(mockReviews),
     ]);
   });
 
@@ -145,7 +143,7 @@ describe('Async actions', () => {
     expect(store.getActions()).toEqual([
       setFavoriteIsLoading(true),
       setFavoriteOffers(mockOffers),
-      setFavoriteIsLoading(false)
+      setFavoriteIsLoading(false),
     ]);
   });
 });
