@@ -1,7 +1,7 @@
 import { offersReducer } from './offers-reducer';
 import { OffersReducerState } from '../../types/state';
 import { setCity, setError, setIsLoading, setOffers, setSort } from '../action';
-import { makeFakeOffers } from '../../utils/mocks';
+import { makeFakeOffer } from '../../utils/mocks';
 import { cities, OffersSortValue } from '../../const';
 
 const initialState: OffersReducerState = {
@@ -12,7 +12,7 @@ const initialState: OffersReducerState = {
   error: '',
 };
 
-const mockOffers = Array(5).fill(makeFakeOffers());
+const mockOffers = Array(5).fill(makeFakeOffer());
 
 describe('Reducer: offersReducer', () => {
   it('without additional parameters should return initial state', () => {

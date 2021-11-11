@@ -1,6 +1,7 @@
 import { name, internet, datatype, address, lorem, image } from 'faker';
 import { UserData } from '../types/auth-data';
 import { Offer } from '../types/offers';
+import { Review } from '../types/reviews';
 
 export const makeFakeUserData = (): UserData => ({
   id: datatype.number(),
@@ -11,7 +12,7 @@ export const makeFakeUserData = (): UserData => ({
   token: datatype.uuid(),
 } as UserData);
 
-export const makeFakeOffers = (): Offer => ({
+export const makeFakeOffer = (): Offer => ({
   bedrooms: datatype.number(),
   city: {
     location: {
@@ -45,3 +46,17 @@ export const makeFakeOffers = (): Offer => ({
   title: name.title(),
   type: lorem.word(),
 } as Offer);
+
+
+export const makeFakeReview = (): Review => ({
+  comment: lorem.text(),
+  date: datatype.datetime().toLocaleString(),
+  id: datatype.number(),
+  rating: datatype.number(),
+  user: {
+    avatarUrl: internet.avatar(),
+    id: datatype.number(),
+    isPro: datatype.boolean(),
+    name: name.firstName(),
+  },
+} as Review);

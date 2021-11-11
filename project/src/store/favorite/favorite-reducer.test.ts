@@ -1,14 +1,14 @@
 import { favoriteReducer } from './favorite-reducer';
 import { FavoriteReducerState } from '../../types/state';
 import { setFavoriteIsLoading, setFavoriteOffers } from '../action';
-import { makeFakeOffers } from '../../utils/mocks';
+import { makeFakeOffer } from '../../utils/mocks';
 
 const initialState: FavoriteReducerState = {
   offers: [],
   isLoading: false,
 };
 
-const mockOffers = Array(5).fill(makeFakeOffers());
+const mockOffers = Array(5).fill(makeFakeOffer());
 
 describe('Reducer: favoriteReducer', () => {
   it('without additional parameters should return initial state', () => {
