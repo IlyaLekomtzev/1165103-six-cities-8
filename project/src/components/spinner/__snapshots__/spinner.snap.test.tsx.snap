@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Spinner should render correctly 1`] = `
+<div>
+  <svg
+    height="200px"
+    preserveAspectRatio="xMidYMid"
+    style="margin: auto; background: none; display: block; shape-rendering: auto;"
+    viewBox="0 0 100 100"
+    width="200px"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <circle
+      cx="50"
+      cy="50"
+      fill="none"
+      r="32"
+      stroke="#4481c3"
+      stroke-dasharray="50.26548245743669 50.26548245743669"
+      stroke-linecap="round"
+      stroke-width="8"
+    >
+      <animatetransform
+        attributeName="transform"
+        dur="1s"
+        keyTimes="0;1"
+        repeatCount="indefinite"
+        type="rotate"
+        values="0 50 50;360 50 50"
+      />
+    </circle>
+  </svg>
+</div>
+`;
