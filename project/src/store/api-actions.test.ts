@@ -12,7 +12,7 @@ import {
   requireLogout,
   setReviews,
   setFavoriteIsLoading,
-  setFavoriteOffers,
+  setFavoriteOffers
 } from './action';
 import {
   checkAuthAction,
@@ -20,7 +20,7 @@ import {
   fetchOffersAction,
   logoutAction,
   sendReview,
-  getFavorites,
+  getFavorites
 } from './api-actions';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { State } from '../types/state';
