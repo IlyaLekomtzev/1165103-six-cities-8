@@ -29,6 +29,7 @@ const AUTH_FAIL_MESSAGE = 'Не удалось авторизоваться. П�
 const AUTH_SUCCESS_MESSAGE = 'Вы успешно авторизованы';
 const SEND_REVIEW_SUCCESS_MESSAGE = 'Отзыв успешно отправлен';
 const SEND_REVIEW_FAIL_MESSAGE = 'Не удалось отправить отзыв';
+const SEND_FAVORITE_LOAD_FAIL_MESSAGE = 'Не удалось загрузить избранные предложения';
 const SEND_FAVORITE_ADD_SUCCESS_MESSAGE = 'Предложение успешно добавлено в избранное';
 const SEND_FAVORITE_REMOVE_SUCCESS_MESSAGE = 'Предложение успешно удалено из избранного';
 const SEND_FAVORITE_FAIL_MESSAGE = 'Не удалось добавить предложение в избранное';
@@ -122,7 +123,7 @@ export const getFavorites = (): ThunkActionResult => async (dispatch, _getState,
     const adaptedData: Offer[] = data.map((offer: any) => convertSnakeToCamelCase(offer));
     dispatch(setFavoriteOffers(adaptedData));
   } catch {
-    toast.error(SEND_REVIEW_FAIL_MESSAGE);
+    toast.error(SEND_FAVORITE_LOAD_FAIL_MESSAGE);
   }
   dispatch(setFavoriteIsLoading(false));
 };
