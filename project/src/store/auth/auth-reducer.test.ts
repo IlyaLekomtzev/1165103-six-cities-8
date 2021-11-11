@@ -26,24 +26,15 @@ describe('Reducer: authReducer', () => {
 
   it('should change the authorization status', () => {
     expect(authReducer(initialState, setAuthorizationStatus(AuthorizationStatus.Auth)))
-      .toEqual({
-        authorizationStatus: AuthorizationStatus.Auth,
-        user: initialState.user
-      });
+      .toEqual({ ...initialState, authorizationStatus: AuthorizationStatus.Auth });
 
     expect(authReducer(initialState, setAuthorizationStatus(AuthorizationStatus.NoAuth)))
-      .toEqual({
-        authorizationStatus: AuthorizationStatus.NoAuth,
-        user: initialState.user
-      });
+      .toEqual({ ...initialState, authorizationStatus: AuthorizationStatus.NoAuth });
   });
 
   it('should set user data', () => {
     expect(authReducer(initialState, setUserData(mockUserData)))
-      .toEqual({
-        authorizationStatus: initialState.authorizationStatus,
-        user: mockUserData
-      });
+      .toEqual({ ...initialState, user: mockUserData });
   });
 
   it('should return to the initial state when logged out', () => {
