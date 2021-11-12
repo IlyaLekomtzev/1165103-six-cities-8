@@ -1,5 +1,5 @@
 import { useRef, useEffect, memo } from 'react';
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Offer, City } from '../../types/offers';
