@@ -11,7 +11,7 @@ describe('Component: CitiesList', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>
-          <CitiesList cities={cities} selectedCity={cities[0]} />
+        <CitiesList cities={cities} selectedCity={cities[0]} />
       </Provider>,
     );
 
