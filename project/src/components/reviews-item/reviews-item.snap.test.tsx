@@ -15,7 +15,7 @@ const review: Review = {
   },
 };
 
-describe('Component: Mistakes', () => {
+describe('Component: ReviewsItem', () => {
   it('should render correctly', () => {
     const { container } = render(<ReviewsItem review={review} />);
     expect(container).toMatchSnapshot();

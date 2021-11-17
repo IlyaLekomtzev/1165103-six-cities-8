@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Mistakes should render correctly 1`] = `
+exports[`Component: ReviewsItem should render correctly 1`] = `
 <div>
   <li
     class="reviews__item"

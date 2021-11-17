@@ -41,7 +41,7 @@ const reviews: Review[] = [
   },
 ];
 
-describe('Component: Mistakes', () => {
+describe('Component: ReviewsList', () => {
   it('should render correctly', () => {
     const { container } = render(<ReviewsList reviews={reviews} />);
     expect(container).toMatchSnapshot();

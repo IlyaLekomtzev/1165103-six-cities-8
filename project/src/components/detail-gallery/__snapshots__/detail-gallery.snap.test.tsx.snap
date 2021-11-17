@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Mistakes should render correctly 1`] = `
+exports[`Component: DetailGallery should render correctly 1`] = `
 <div>
   <div
     class="property__gallery"
