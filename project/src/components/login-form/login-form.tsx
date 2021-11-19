@@ -1,6 +1,9 @@
 import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginAction } from '../../store/api-actions';
+import { toast } from 'react-toastify';
+
+const PASSWORD_VALIDATE_ERROR_MESSAGE = 'Пароль должен содержать минимум одну букву и цифру.';
 
 function LoginForm(): JSX.Element {
   const [email, setEmail] = useState('');
@@ -9,7 +12,11 @@ function LoginForm(): JSX.Element {
 
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
-    dispatch(loginAction({email, password}));
+    if (/\d/.test(password) && /[a-zA-Z]/.test(password)) {
+      dispatch(loginAction({ email, password }));
+    } else {
+      toast.info(PASSWORD_VALIDATE_ERROR_MESSAGE);
+    }
   };
 
   return (

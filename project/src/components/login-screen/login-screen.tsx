@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCity } from '../../store/action';
 import { State } from '../../types/state';
 import { AuthorizationStatus, AppRoute, cities } from '../../const';
+import { getRandomInt } from '../../utils/utils';
 
 function LoginScreen(): JSX.Element {
   const authorizationStatus = useSelector(({ AUTH }: State) => AUTH.authorizationStatus);
@@ -15,7 +16,6 @@ function LoginScreen(): JSX.Element {
     return <Redirect to={AppRoute.Main} />;
   }
 
-  const getRandomInt = (max: number): number => Math.floor(Math.random() * max);
   const randomCity = cities[getRandomInt(cities.length - 1)];
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
