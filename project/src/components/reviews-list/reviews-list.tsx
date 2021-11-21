@@ -8,9 +8,9 @@ type reviewsListPropsTypes = {
 }
 
 function ReviewsList({ reviews }: reviewsListPropsTypes): JSX.Element {
-  const showReviews = [...reviews];
+  let showReviews = [...reviews];
   if (showReviews.length > 1) {
-    showReviews.sort((a, b) => (new Date(b.date) as any) - (new Date(a.date) as any)).slice(0, REVIEWS_COUNT);
+    showReviews = showReviews.sort((a, b) => (new Date(b.date) as any) - (new Date(a.date) as any)).slice(0, REVIEWS_COUNT);
   }
 
   const renderReviews = () => {

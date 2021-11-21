@@ -13,6 +13,7 @@ const MESSAGE_MAX_LENGTH = 300;
 function ReviewsForm({ id }: reviewsFormPropsTypes): JSX.Element {
   const [rating, setRating] = useState<number>(0);
   const [message, setMessage] = useState<string>('');
+  const [radioGroupCounter, setRadioGroupCounter] = useState<number>(0);
   const dispatch = useDispatch();
 
   const handleRadioChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,10 +24,16 @@ function ReviewsForm({ id }: reviewsFormPropsTypes): JSX.Element {
     setMessage(event.target.value);
   }, []);
 
+  const clearForm = () => {
+    setRating(0);
+    setMessage('');
+    setRadioGroupCounter((state) => state + 1);
+  };
+
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(sendReview({ id, rating, comment: message }));
-    setMessage('');
+    clearForm();
   };
 
   const handleButtonDisabled = () => {
@@ -42,6 +49,7 @@ function ReviewsForm({ id }: reviewsFormPropsTypes): JSX.Element {
       <RatingStarsRadioGroup
         label="Your review"
         onChange={handleRadioChange}
+        key={radioGroupCounter}
       />
       <textarea
         className="reviews__textarea form__textarea"
