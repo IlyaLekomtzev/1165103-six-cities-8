@@ -8,11 +8,14 @@ type reviewsListPropsTypes = {
 }
 
 function ReviewsList({ reviews }: reviewsListPropsTypes): JSX.Element {
-  const showReviews = reviews.slice(0, REVIEWS_COUNT);
+  const showReviews = [...reviews];
+  if (showReviews.length > 1) {
+    showReviews.sort((a, b) => (new Date(b.date) as any) - (new Date(a.date) as any)).slice(0, REVIEWS_COUNT);
+  }
 
   const renderReviews = () => {
     if (showReviews.length === 0) {
-      return <h3 style={{textAlign: 'center'}}>No reviews</h3>;
+      return <h3 style={{ textAlign: 'center' }}>No reviews</h3>;
     }
 
     return showReviews.map((review) => <ReviewsItem key={review.id} review={review} />);
