@@ -15,24 +15,13 @@ import {
   setFavoriteOffers,
   setFavoriteIsLoading
 } from './action';
-
-import { AuthorizationStatus, APIRoute, AppRoute } from '../const';
+import { AuthorizationStatus, APIRoute, AppRoute, Message } from '../const';
 import { convertSnakeToCamelCase } from '../utils/convertSnakeToCamelCase';
 import { saveToken, dropToken } from '../services/token';
 import { toast } from 'react-toastify';
 import { AuthData, UserData } from '../types/auth-data';
 import { Review, SendReview } from '../types/reviews';
 import { Offer } from '../types/offers';
-
-const NO_AUTH_MESSAGE = 'Не забудьте авторизоваться';
-const AUTH_FAIL_MESSAGE = 'Не удалось авторизоваться. Проверьте введённые данные';
-const AUTH_SUCCESS_MESSAGE = 'Вы успешно авторизованы';
-const SEND_REVIEW_SUCCESS_MESSAGE = 'Отзыв успешно отправлен';
-const SEND_REVIEW_FAIL_MESSAGE = 'Не удалось отправить отзыв';
-const SEND_FAVORITE_LOAD_FAIL_MESSAGE = 'Не удалось загрузить избранные предложения';
-const SEND_FAVORITE_ADD_SUCCESS_MESSAGE = 'Предложение успешно добавлено в избранное';
-const SEND_FAVORITE_REMOVE_SUCCESS_MESSAGE = 'Предложение успешно удалено из избранного';
-const SEND_FAVORITE_FAIL_MESSAGE = 'Не удалось добавить предложение в избранное';
 
 export const fetchOffersAction = (): ThunkActionResult => async (dispatch, _getState, api): Promise<void> => {
   dispatch(setIsLoading(true));
@@ -47,14 +36,13 @@ export const fetchOffersAction = (): ThunkActionResult => async (dispatch, _getS
 };
 
 export const checkAuthAction = (): ThunkActionResult => async (dispatch, _getState, api) => {
-  try {
-    const { data } = await api.get(APIRoute.Login);
+  const { data } = await api.get(APIRoute.Login);
+
+  if (data) {
     const adaptedData: UserData = convertSnakeToCamelCase(data);
     dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
     dispatch(setUserData(adaptedData));
-    toast.success(AUTH_SUCCESS_MESSAGE);
-  } catch {
-    toast.info(NO_AUTH_MESSAGE);
+    toast.success(Message.AuthSuccess);
   }
 };
 
@@ -65,10 +53,10 @@ export const loginAction = ({ email, password }: AuthData): ThunkActionResult =>
     saveToken(adaptedData.token);
     dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
     dispatch(setUserData(adaptedData));
-    toast.success(AUTH_SUCCESS_MESSAGE);
+    toast.success(Message.AuthSuccess);
     dispatch(redirectToRoute(AppRoute.Main));
   } catch {
-    toast.error(AUTH_FAIL_MESSAGE);
+    toast.error(Message.AuthFail);
   }
 };
 
@@ -110,9 +98,9 @@ export const sendReview = ({ id, rating, comment }: sendReviewType): ThunkAction
     const { data } = await api.post(`${APIRoute.Comments}/${id}`, { rating, comment });
     const adaptedData: Review[] = data.map((review: any) => convertSnakeToCamelCase(review));
     dispatch(setReviews(adaptedData));
-    toast.success(SEND_REVIEW_SUCCESS_MESSAGE);
+    toast.success(Message.SendReviewSuccess);
   } catch {
-    toast.error(SEND_REVIEW_FAIL_MESSAGE);
+    toast.success(Message.SendReviewFail);
   }
 };
 
@@ -123,7 +111,7 @@ export const getFavorites = (): ThunkActionResult => async (dispatch, _getState,
     const adaptedData: Offer[] = data.map((offer: any) => convertSnakeToCamelCase(offer));
     dispatch(setFavoriteOffers(adaptedData));
   } catch {
-    toast.error(SEND_FAVORITE_LOAD_FAIL_MESSAGE);
+    toast.error(Message.SendFavoriteLoadFail);
   }
   dispatch(setFavoriteIsLoading(false));
 };
@@ -138,8 +126,8 @@ export const sendFavorite = (id: number, isFavorite: boolean): ThunkActionResult
     dispatch(getFavorites());
     dispatch(getRoom(`${id}`));
 
-    toast.success(adaptedData.isFavorite ? SEND_FAVORITE_ADD_SUCCESS_MESSAGE : SEND_FAVORITE_REMOVE_SUCCESS_MESSAGE);
+    toast.success(adaptedData.isFavorite ? Message.SendFavoriteAddSuccess : Message.SendFavoriteRemoveSuccess);
   } catch {
-    toast.error(SEND_FAVORITE_FAIL_MESSAGE);
+    toast.error(Message.SendFavoriteFail);
   }
 };

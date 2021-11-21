@@ -58,3 +58,14 @@ export const offersSortValues = [
     value: OffersSortValue.TopRatedFirst,
   },
 ];
+
+export enum Message {
+  AuthFail = 'Не удалось авторизоваться. Проверьте введённые данные',
+  AuthSuccess = 'Вы успешно авторизованы',
+  SendReviewSuccess = 'Отзыв успешно отправлен',
+  SendReviewFail = 'Не удалось отправить отзыв',
+  SendFavoriteLoadFail = 'Не удалось загрузить избранные предложения',
+  SendFavoriteAddSuccess = 'Предложение успешно добавлено в избранное',
+  SendFavoriteRemoveSuccess = 'Предложение успешно удалено из избранного',
+  SendFavoriteFail = 'Не удалось добавить предложение в избранное',
+}
