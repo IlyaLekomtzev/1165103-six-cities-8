@@ -8,9 +8,10 @@ import { Offer } from '../../types/offers';
 type offerCardPropsTypes = {
   offer: Offer;
   onMouseEnter: (id: number) => void;
+  onMouseLeave: () => void;
 };
 
-function OfferCard({ offer, onMouseEnter }: offerCardPropsTypes): JSX.Element {
+function OfferCard({ offer, onMouseEnter, onMouseLeave }: offerCardPropsTypes): JSX.Element {
   const dispatch = useDispatch();
   const { id, title, previewImage, price, type, isPremium, isFavorite, rating } = offer;
 
@@ -22,6 +23,7 @@ function OfferCard({ offer, onMouseEnter }: offerCardPropsTypes): JSX.Element {
     <article
       className="cities__place-card place-card"
       onMouseEnter={() => onMouseEnter(id)}
+      onMouseLeave={onMouseLeave}
     >
       {isPremium &&
         <div className="place-card__mark">

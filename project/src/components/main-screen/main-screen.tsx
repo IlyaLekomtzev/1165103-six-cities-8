@@ -21,6 +21,10 @@ function MainScreen(): JSX.Element {
     setActiveOffer(id);
   }, [activeOffer]);
 
+  const handleMouseLeave = useCallback(() => {
+    setActiveOffer(DEFAULT_ACTIVE_OFFER);
+  }, [activeOffer]);
+
   const renderOffers = () => {
     if (isLoading) {
       return <Spinner />;
@@ -40,6 +44,7 @@ function MainScreen(): JSX.Element {
               <OffersList
                 offers={offers}
                 onMouseEnter={(id) => handleMouseEnter(id)}
+                onMouseLeave={() => handleMouseLeave()}
               />
             )}
           </section>
