@@ -69,3 +69,18 @@ export enum Message {
   SendFavoriteRemoveSuccess = 'Предложение успешно удалено из избранного',
   SendFavoriteFail = 'Не удалось добавить предложение в избранное',
 }
+
+export const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];

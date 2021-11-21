@@ -1,4 +1,5 @@
 import { Review } from '../../types/reviews';
+import { getFormatDate } from '../../utils/utils';
 
 type reviewsItemPropsTypes = {
   review: Review;
@@ -25,7 +26,7 @@ function ReviewsItem({ review }: reviewsItemPropsTypes): JSX.Element {
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time className="reviews__time" dateTime={review.date}>{review.date}</time>
+        <time className="reviews__time" dateTime={review.date}>{getFormatDate(review.date)}</time>
       </div>
     </li>
   );
