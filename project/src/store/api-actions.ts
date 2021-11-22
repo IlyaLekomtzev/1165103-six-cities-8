@@ -13,7 +13,8 @@ import {
   setNearbyOffers,
   setErrorRoom,
   setFavoriteOffers,
-  setFavoriteIsLoading
+  setFavoriteIsLoading,
+  setOfferMain
 } from './action';
 import { AuthorizationStatus, APIRoute, AppRoute, Message } from '../const';
 import { convertSnakeToCamelCase } from '../utils/convertSnakeToCamelCase';
@@ -122,9 +123,9 @@ export const sendFavorite = (id: number, isFavorite: boolean): ThunkActionResult
     const { data } = await api.post(`${APIRoute.Favorite}/${id}/${status}`);
     const adaptedData: Offer = convertSnakeToCamelCase(data);
 
-    dispatch(fetchOffersAction());
+    dispatch(setOfferMain(adaptedData));
     dispatch(getFavorites());
-    dispatch(getRoom(`${id}`));
+    dispatch(setOffer(adaptedData));
 
     toast.success(adaptedData.isFavorite ? Message.SendFavoriteAddSuccess : Message.SendFavoriteRemoveSuccess);
   } catch {

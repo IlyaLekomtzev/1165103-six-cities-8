@@ -26,7 +26,7 @@ function MainScreen(): JSX.Element {
   }, [activeOffer]);
 
   const renderOffers = () => {
-    if (isLoading) {
+    if (isLoading && storeOffers.length === 0) {
       return <Spinner />;
     }
 
@@ -40,13 +40,11 @@ function MainScreen(): JSX.Element {
             <b className="places__found">{offers.length} places to stay in {city}</b>
             <SortPanel />
 
-            {!isLoading && (
-              <OffersList
-                offers={offers}
-                onMouseEnter={(id) => handleMouseEnter(id)}
-                onMouseLeave={() => handleMouseLeave()}
-              />
-            )}
+            <OffersList
+              offers={offers}
+              onMouseEnter={(id) => handleMouseEnter(id)}
+              onMouseLeave={() => handleMouseLeave()}
+            />
           </section>
           <div className="cities__right-section">
             {offers.length ? (

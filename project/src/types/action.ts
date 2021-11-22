@@ -10,6 +10,7 @@ export enum ActionType {
   SetCity = 'offers/setCity',
   SetSort = 'offers/setSort',
   SetOffers = 'offers/setOffers',
+  SetOfferMain = 'offers/setOffer',
   SetIsLoading = 'offers/setIsLoading',
   SetError = 'offers/setError',
 

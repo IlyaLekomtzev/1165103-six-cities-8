@@ -22,6 +22,11 @@ export const setOffers = (offers: Offer[]) => ({
   payload: offers,
 } as const);
 
+export const setOfferMain = (offer: Offer) => ({
+  type: inferLiteralFromString(ActionType.SetOfferMain),
+  payload: offer,
+} as const);
+
 export const setIsLoading = (isLoading: boolean) => ({
   type: inferLiteralFromString(ActionType.SetIsLoading),
   payload: isLoading,

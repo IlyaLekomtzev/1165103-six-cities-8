@@ -18,6 +18,16 @@ const offersReducer = (state: OffersReducerState = initialState, action: Actions
       return { ...state, sort: action.payload };
     case ActionType.SetOffers:
       return { ...state, offers: action.payload };
+    case ActionType.SetOfferMain:
+      return {
+        ...state,
+        offers: state.offers.map((item) => {
+          if (action.payload.id === item.id) {
+            item = action.payload;
+          }
+          return item;
+        }),
+      };
     case ActionType.SetIsLoading:
       return { ...state, isLoading: action.payload };
     case ActionType.SetError:

@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import OfferCard from '../offer-card/offer-card';
+import Spinner from '../spinner/spinner';
 import { Offer } from '../../types/offers';
 import { OffersSortValue } from '../../const';
 import { State } from '../../types/state';
@@ -12,7 +13,7 @@ type offersListPropsTypes = {
 };
 
 function OffersList({ offers, onMouseEnter, onMouseLeave }: offersListPropsTypes): JSX.Element {
-  const sort = useSelector(({ OFFERS }: State) => OFFERS.sort);
+  const { sort, isLoading } = useSelector(({ OFFERS }: State) => OFFERS);
 
   const getSortedOffers = () => {
     switch (sort) {
@@ -31,8 +32,11 @@ function OffersList({ offers, onMouseEnter, onMouseLeave }: offersListPropsTypes
   };
 
   const renderCards = () => {
-    const sortedOffers = getSortedOffers();
+    if (isLoading) {
+      return <Spinner />;
+    }
 
+    const sortedOffers = getSortedOffers();
     return (
       sortedOffers.map((offer) => (
         <OfferCard
